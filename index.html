@@ -1,24 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0066EE">
-  <title>JM-Fit Tracker</title>
-  
   <title>JM Tracker Pro</title>
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
   <style>
-    body{
-      font-family: Arial, sans-serif;
-      margin:0;
-      background:#f3f5f7;
-      color:#111;
     /* المتغيرات الأساسية (اللون الأزرق الجديد) */
     :root {
       --bg: #f4f7f6; --card-bg: #ffffff; --text: #333333; --border: #e0e0e0;
@@ -30,44 +18,20 @@
       --bar-carb: linear-gradient(90deg, #11998e, #38ef7d);
       --bar-fat: linear-gradient(90deg, #f2c94c, #f2994a);
     }
-    header{
-      background:#0066EE;
-      color:white;
-      padding:18px;
-      text-align:center;
-      font-size:28px;
-      font-weight:bold;
     [data-theme="dark"] {
       --bg: #121212; --card-bg: #1e1e1e; --text: #e0e0e0; --border: #333;
     }
-    .container{
-      max-width:700px;
-      margin:auto;
-      padding:16px;
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0; background: var(--bg); color: var(--text);
       transition: background 0.3s, color 0.3s; padding-bottom: 40px;
     }
-    .card{
-      background:white;
-      padding:16px;
-      border-radius:16px;
-      margin-bottom:16px;
-      box-shadow:0 2px 8px rgba(0,0,0,.08);
     header {
       background: var(--card-bg); padding: 15px; border-bottom: 2px solid var(--primary);
       display: flex; justify-content: space-between; align-items: center;
       position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    input,select,button{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      border-radius:10px;
-      border:1px solid #ccc;
-      box-sizing:border-box;
     .brand { font-size: 24px; font-weight: bold; color: var(--primary); }
     .controls button { padding: 5px 10px; font-size: 14px; width: auto; margin: 0 5px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 8px;}
     .controls button:hover { background: var(--border); }
@@ -78,12 +42,6 @@
       margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       border: 1px solid var(--border); transition: 0.3s;
     }
-    button{
-      background:#0066EE;
-      color:white;
-      border:none;
-      font-weight:bold;
-      cursor:pointer;
     h2 { font-size: 1.2rem; margin-top: 0; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
     
     input, select, button {
@@ -91,10 +49,6 @@
       border: 1px solid var(--border); background: var(--bg); color: var(--text);
       box-sizing: border-box; font-family: inherit; font-size: 1rem;
     }
-    .totals{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
     button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; transition: 0.2s; }
     button:active { transform: scale(0.97); }
     
@@ -119,11 +73,6 @@
       border: 1px solid var(--border); border-radius: 10px; max-height: 220px;
       overflow-y: auto; z-index: 50; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
-    .macro{
-      background:#eef4f8;
-      padding:14px;
-      border-radius:12px;
-      text-align:center;
     .suggestion-item { 
       display: flex; justify-content: space-between; align-items: center;
       padding: 10px; cursor: pointer; border-bottom: 1px solid var(--border); 
@@ -135,18 +84,12 @@
       display: none; position: relative; width: 100%; max-width: 400px; 
       margin: 10px auto; border-radius: 12px; overflow: hidden; border: 2px solid var(--primary);
     }
-    .meal{
-      border-bottom:1px solid #eee;
-      padding:10px 0;
     #scannerVideo { width: 100%; height: auto; display: block; background: #000; }
     .scanner-laser {
       position: absolute; top: 50%; left: 5%; width: 90%; height: 2px; 
       background: var(--danger); box-shadow: 0 0 8px var(--danger);
       animation: laserMove 2s infinite ease-in-out;
     }
-    .topbar{
-      display:flex;
-      gap:10px;
     @keyframes laserMove {
       0% { top: 20%; } 50% { top: 80%; } 100% { top: 20%; }
     }
@@ -184,13 +127,7 @@
   <script src="https://unpkg.com/@zxing/library@latest"></script>
 </head>
 <body>
-<header>JM-Fit</header>
 
-<div class="container">
-
-<div class="card">
-  <div class="topbar">
-    <button onclick="toggleLang()">AR / EN</button>
 <header>
   <div class="brand">JM Tracker</div>
   <div class="controls">
@@ -201,10 +138,6 @@
   </div>
 </header>
 
-  <select id="foodSelect"></select>
-  <input type="number" id="grams" placeholder="Amount in grams">
-  <button onclick="addMeal()">Add Meal</button>
-</div>
 <div class="container">
   
   <div class="card">
@@ -246,13 +179,6 @@
     <button onclick="calculateGoals()" id="t_calcBtn">احسب واحفظ أهدافي</button>
   </div>
 
-<div class="card">
-  <h2 id="dailyTitle">Daily Totals</h2>
-  <div class="totals">
-    <div class="macro"><b>Calories</b><br><span id="calories">0</span></div>
-    <div class="macro"><b>Protein</b><br><span id="protein">0</span> g</div>
-    <div class="macro"><b>Carbs</b><br><span id="carbs">0</span> g</div>
-    <div class="macro"><b>Fat</b><br><span id="fat">0</span> g</div>
   <div class="card">
     <h2 id="t_progTitle">متابعة اليوم</h2>
     <div class="progress-container">
@@ -272,12 +198,7 @@
       <div class="progress-bar"><div id="fatBar" class="progress-fill"></div></div>
     </div>
   </div>
-</div>
 
-<div class="card">
-  <h2 id="mealsTitle">Today's Meals</h2>
-  <div id="meals"></div>
-</div>
   <div class="card">
     <h2 id="t_addTitle">إضافة وجبة</h2>
     <div style="display:flex; gap:10px;">
@@ -300,15 +221,6 @@
     <button onclick="addMeal()" id="t_addBtn">إضافة الوجبة +</button>
   </div>
 
-<div class="card">
-  <h2 id="customTitle">Add Custom Food</h2>
-  <input id="customName" placeholder="Food name">
-  <input id="customCalories" type="number" placeholder="Calories / 100g">
-  <input id="customProtein" type="number" placeholder="Protein / 100g">
-  <input id="customCarbs" type="number" placeholder="Carbs / 100g">
-  <input id="customFat" type="number" placeholder="Fat / 100g">
-  <button onclick="addCustomFood()">Save Food</button>
-</div>
   <div class="card" id="foodFormCard" style="display:none; border: 2px solid var(--primary);">
     <h2 id="t_customTitle">إضافة / تعديل أكلة (لكل 100 جرام)</h2>
     <input type="hidden" id="editFoodId">
@@ -328,12 +240,6 @@
     </div>
   </div>
 
-<div class="card" style="background: #1e1e1e; color: white; text-align: center;">
-  <h3 style="margin-top: 0; color: #fff; font-size: 18px;">إدارة البيانات (النسخ الاحتياطي)</h3>
-  <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">احفظ أكلاتك برة التطبيق عشان تضمن إنها متضيعش أبداً</p>
-  <button onclick="exportData()" style="background-color: #0066EE; margin-bottom: 10px;">نسخ البيانات كنص</button>
-  <button onclick="importData()" style="background-color: #28a745;">استعادة البيانات</button>
-</div>
   <div class="card">
     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
       <h2 id="t_historyTitle" style="margin:0; border:none; padding:0;">سجل اليوم</h2>
@@ -345,13 +251,6 @@
 </div>
 
 <script>
-let lang = localStorage.getItem('lang') || 'en';
-
-let foods = JSON.parse(localStorage.getItem('foods')) || [
-  {name:"White Rice", calories:130, protein:2.7, carbs:28, fat:0.3},
-  {name:"Chicken Breast", calories:165, protein:31, carbs:0, fat:3.6},
-  {name:"Egg", calories:155, protein:13, carbs:1.1, fat:11},
-  {name:"Oats", calories:389, protein:17, carbs:66, fat:7}
 // --- Data & State ---
 let defaultDB = [
   {id: 1, ar: "صدور دجاج", en: "Chicken Breast", cal: 165, p: 31, c: 0, f: 3.6},
@@ -365,7 +264,6 @@ let defaultDB = [
   {id: 9, ar: "جبنة قريش", en: "Cottage Cheese", cal: 98, p: 11, c: 3.4, f: 4.3}
 ];
 
-let meals = JSON.parse(localStorage.getItem('meals')) || [];
 let foodDB = JSON.parse(localStorage.getItem('jm_food_db'));
 if (!foodDB || foodDB.length === 0) {
   foodDB = defaultDB;
@@ -407,9 +305,6 @@ const dict = {
   }
 };
 
-function save(){
-  localStorage.setItem('foods', JSON.stringify(foods));
-  localStorage.setItem('meals', JSON.stringify(meals));
 // --- Initialization ---
 function init() {
   document.documentElement.setAttribute('data-theme', appData.theme);
@@ -438,15 +333,6 @@ function init() {
   renderMeals();
 }
 
-function renderFoods(){
-  const select = document.getElementById('foodSelect');
-  select.innerHTML = '';
-  foods.forEach((food,i)=>{
-    let option = document.createElement('option');
-    option.value=i;
-    option.textContent=food.name;
-    select.appendChild(option);
-  });
 // --- Barcode Scanner Logic ---
 function toggleScanner() {
   const container = document.getElementById('scannerContainer');
@@ -471,9 +357,6 @@ function toggleScanner() {
   }
 }
 
-function addMeal(){
-  const index = document.getElementById('foodSelect').value;
-  const grams = parseFloat(document.getElementById('grams').value);
 function fetchProductData(barcode) {
   // استخدام API المفتوح والمجاني لجلب بيانات الباركود
   const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}.json`;
@@ -507,7 +390,6 @@ function fetchProductData(barcode) {
           fat = fat * factor;
         }
 
-  if(!grams) return;
         // فتح نافذة كارت الحفظ تلقائياً وتعبئة البيانات المحسوبة بدقة لكل 100 جرام
         document.getElementById('suggestions').style.display = 'none';
         document.getElementById('editFoodId').value = '';
@@ -532,8 +414,6 @@ function fetchProductData(barcode) {
     });
 }
 
-  const food = foods[index];
-  const factor = grams/100;
 // --- Toggle Goal Mode (Manual vs Auto) ---
 function toggleGoalMode() {
   const goal = document.getElementById('goal').value;
@@ -551,13 +431,6 @@ function toggleGoalMode() {
   }
 }
 
-  meals.push({
-    name: food.name,
-    grams,
-    calories:(food.calories*factor).toFixed(1),
-    protein:(food.protein*factor).toFixed(1),
-    carbs:(food.carbs*factor).toFixed(1),
-    fat:(food.fat*factor).toFixed(1)
 // --- Backup & Restore Database ---
 function exportDB() {
   const dataStr = localStorage.getItem('jm_food_db');
@@ -571,8 +444,6 @@ function exportDB() {
   });
 }
 
-  save();
-  renderMeals();
 function importDB() {
   const code = prompt(appData.lang === 'ar' ? "أدخل كود النسخ الاحتياطي الذي قمت بنسخه مسبقاً لاستعادة الأكلات:" : "Enter your backup code to restore food database:");
   if(!code) return;
@@ -593,29 +464,6 @@ function importDB() {
   }
 }
 
-function renderMeals(){
-  const mealsDiv = document.getElementById('meals');
-  mealsDiv.innerHTML='';
-
-  let totalC=0,totalP=0,totalCarb=0,totalF=0;
-
-  meals.forEach((meal,index)=>{
-    totalC += parseFloat(meal.calories);
-    totalP += parseFloat(meal.protein);
-    totalCarb += parseFloat(meal.carbs);
-    totalF += parseFloat(meal.fat);
-
-    const div=document.createElement('div');
-    div.className='meal';
-    div.innerHTML=`
-      <b>${meal.name}</b> - ${meal.grams}g<br>
-      ${meal.calories} kcal |
-      P: ${meal.protein}g |
-      C: ${meal.carbs}g |
-      F: ${meal.fat}g
-    `;
-    mealsDiv.appendChild(div);
-  });
 // --- Toggles ---
 function toggleTheme() {
   appData.theme = appData.theme === 'dark' ? 'light' : 'dark';
@@ -624,10 +472,6 @@ function toggleTheme() {
   saveData();
 }
 
-  document.getElementById('calories').textContent=totalC.toFixed(1);
-  document.getElementById('protein').textContent=totalP.toFixed(1);
-  document.getElementById('carbs').textContent=totalCarb.toFixed(1);
-  document.getElementById('fat').textContent=totalF.toFixed(1);
 function toggleLang() {
   appData.lang = appData.lang === 'ar' ? 'en' : 'ar';
   saveData();
@@ -635,13 +479,6 @@ function toggleLang() {
   renderMeals();
 }
 
-function addCustomFood(){
-  const food = {
-    name:document.getElementById('customName').value,
-    calories:parseFloat(document.getElementById('customCalories').value),
-    protein:parseFloat(document.getElementById('customProtein').value),
-    carbs:parseFloat(document.getElementById('customCarbs').value),
-    fat:parseFloat(document.getElementById('customFat').value)
 function applyLang() {
   const lang = appData.lang;
   document.documentElement.lang = lang;
@@ -737,7 +574,6 @@ function calculateGoals() {
     c: Math.round(carbs), f: Math.round(fats)
   };
 
-  if(!food.name) return;
   saveData();
   renderProgress();
   alert(appData.lang === 'ar' ? "تم حساب وتحديث أهدافك بناء على المعادلة الجديدة بنجاح!" : "Goals updated successfully!");
@@ -759,10 +595,6 @@ function openAddFood(name = '') {
   card.scrollIntoView({behavior: "smooth"});
 }
 
-  foods.push(food);
-  save();
-  renderFoods();
-  alert(lang==='en' ? 'Food Added' : 'تم إضافة الأكلة');
 function editFood(event, id) {
   event.stopPropagation();
   document.getElementById('suggestions').style.display = 'none';
@@ -783,15 +615,10 @@ function editFood(event, id) {
   card.scrollIntoView({behavior: "smooth"});
 }
 
-function toggleLang(){
-  lang = lang === 'en' ? 'ar' : 'en';
-  localStorage.setItem('lang', lang);
 function cancelEdit() {
   document.getElementById('foodFormCard').style.display = 'none';
 }
 
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 function saveFoodDB() {
   const idStr = document.getElementById('editFoodId').value;
   const ar = document.getElementById('foodNameAr').value.trim();
@@ -805,14 +632,6 @@ function saveFoodDB() {
     return alert(appData.lang === 'ar' ? "يرجى ملء جميع الحقول بشكل صحيح" : "Please fill all fields correctly");
   }
 
-  if(lang==='ar'){
-    document.getElementById('dailyTitle').textContent='إجمالي اليوم';
-    document.getElementById('mealsTitle').textContent='وجبات اليوم';
-    document.getElementById('customTitle').textContent='إضافة أكلة جديدة';
-  }else{
-    document.getElementById('dailyTitle').textContent='Daily Totals';
-    document.getElementById('mealsTitle').textContent="Today's Meals";
-    document.getElementById('customTitle').textContent='Add Custom Food';
   if(idStr) {
     const id = parseInt(idStr);
     const index = foodDB.findIndex(x => x.id === id);
@@ -830,19 +649,6 @@ function saveFoodDB() {
   handleSearch();
 }
 
-// دالات النسخ الاحتياطي والاستعادة المضافة
-function exportData() {
-    const allData = {};
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        allData[key] = localStorage.getItem(key);
-    }
-    const jsonString = JSON.stringify(allData);
-    
-    navigator.clipboard.writeText(jsonString).then(() => {
-        alert("✅ تم نسخ أكلاتك بنجاح! افتح تطبيق النوتس في موبايلك واعمل (Paste) واحفظ النص عندك.");
-    }).catch(err => {
-        prompt("اضغط مطولاً وانسخ هذا النص واحفظه عندك في النوتس:", jsonString);
 // --- Smart Search ---
 function handleSearch() {
   const query = document.getElementById('searchInput').value.toLowerCase();
@@ -878,21 +684,6 @@ function handleSearch() {
   }
 }
 
-function importData() {
-    const jsonString = prompt("قم بلصق (Paste) النص الاحتياطي الذي حفظته سابقاً هنا:");
-    if (jsonString) {
-        try {
-            const parsedData = JSON.parse(jsonString);
-            localStorage.clear();
-            for (const key in parsedData) {
-                localStorage.setItem(key, parsedData[key]);
-            }
-            alert("🎉 تم استعادة جميع أكلاتك وبياناتك بنجاح!");
-            window.location.reload();
-        } catch (e) {
-            alert("❌ عذراً، النص الذي أدخلته غير صحيح.");
-        }
-    }
 function selectFood(id) {
   selectedFood = foodDB.find(f => f.id === id);
   if(selectedFood) {
@@ -1014,12 +805,9 @@ function saveData() {
   localStorage.setItem('jm_app_data', JSON.stringify(appData));
 }
 
-renderFoods();
-renderMeals();
-toggleLang();
-toggleLang();
 // Start App
 init();
 </script>
 
 </body>
+</html>
